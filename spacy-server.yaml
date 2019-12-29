@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: spacy-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spacy-server
+  template:
+    metadata:
+      labels:
+        app: spacy-server
+    spec:
+      containers:
+        - name: spacy-server
+          image: gcr.io/k8scaleio/spacy-server:1.0
+          ports:
+          - containerPort: 8050
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8050
+            periodSeconds: 10
+            timeoutSeconds: 10
+            successThreshold: 1
+            failureThreshold: 10
