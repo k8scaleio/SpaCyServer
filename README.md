@@ -9,17 +9,12 @@ This is just to demo how spacy service would run on GKE.
 
 ## Running the container
 
-`
-docker run -p 8050:8050 spacy-server:1.0
+`docker run -p 8050:8050 spacy-server:1.0`
 
-`
-
-## Testing the endpoing
+## Testing the endpoint
 
 ` 
-
 curl -d '{"text":"This is a demo for running Spacy on GKE"}' -H "Content-Type: application/json" -X POST http://localhost:8050/extract-phrase
 {"noun":["a demo","Spacy","GKE"],"verb":["running"]}
-
 `
 
