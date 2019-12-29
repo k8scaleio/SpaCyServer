@@ -14,7 +14,8 @@ This is just to demo how spacy service would run on GKE.
 ## Testing the endpoint
 
 ` 
-curl -d '{"text":"This is a demo for running Spacy on GKE"}' -H "Content-Type: application/json" -X POST http://localhost:8050/extract-phrase
-{"noun":["a demo","Spacy","GKE"],"verb":["running"]}
-`
+curl -d '{"text":"This is a demo for running Spacy on GKE"}' -H "Content-Type: application/json" -X POST http://localhost:8050/extract-phrase`
+
+Expect the output
+`{"noun":["a demo","Spacy","GKE"],"verb":["running"]}`
 
