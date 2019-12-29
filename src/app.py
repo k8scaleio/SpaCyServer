@@ -10,6 +10,7 @@ import spacy
 import textacy
 import os.path
 from spacy.matcher import PhraseMatcher
+from entity_relation import extract_currency_relations
 nlp = spacy.load('en_core_web_sm')
 matcher = PhraseMatcher(nlp.vocab)
 
@@ -48,6 +49,19 @@ def extract_phrase():
     else:
         return Response()
 
+@app.route('/extract-relation', methods = ['POST'])
+def find_relation():
+    if request.method == 'POST':
+        data = request.get_data()
+        dataDict = json.loads(data)
+        doc = nlp(dataDict["text"])
+        relations = extract_currency_relations(doc)
+        output = {}
+        for r1, r2 in relations:
+            output[r1.text] = r2.text
+        return jsonify(output)
+    else:
+        return "Invalid Request"
 
 @app.route('/ping', methods = ['GET'])
 def health():
